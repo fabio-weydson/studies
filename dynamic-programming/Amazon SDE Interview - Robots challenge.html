@@ -109,6 +109,27 @@ Return <b>true</b> if valid, otherwise <b>false</b>.
 <textarea id="code">
 function isValidTimeSeries(grid) {
     // Your solution here
+
+function isValidTimeSeries(grid) {
+   let results = [];
+   let robotsIndexes = []
+
+   for(let i=0; i < grid[0].length; i++) {
+       let n = grid[0][i]
+       if(n==0) continue;
+       robotsIndexes.push(i)
+   }
+   for(let i=0; i < robotsIndexes.length; i++) {
+       let position = robotsIndexes[i];
+       if(grid[1][position+1]==1 || grid[1][position-1]==1 || grid[1][position]==1) {
+        results.push(true)
+       } else { results.push(false) }
+
+   }
+   return results.every(Boolean)
+
+}
+
 }
 </textarea>
 
@@ -125,29 +146,24 @@ function isValidTimeSeries(grid) {
     try {
         eval(userCode);
 
-        const tests = [
-            {
-                input: [[1,0,0,1],[0,1,1,0]],
-                expected: true
-            },
-            {
-                input: [[1,0,0,0,1],[1,0,1,0,0]],
-                expected: false
-            },
-            {
-                input: [[1,0,1],[0,1,1]],
-                expected: true
-            },
-            {
-                input: [[1,0,1],[0,0,1]],
-                expected: false
-            },
-            {
-                input: [[0,1,0],[1,0,0]],
-                expected: true
-            }
-        ];
+   const tests = [
+{ input: [[1,0,0,1],[0,1,1,0]], expected: true },
+{ input: [[1,0,0,0,1],[1,0,1,0,0]], expected: false },
+{ input: [[1,0,1],[0,1,1]], expected: true },
+{ input: [[1,0,1],[0,0,1]], expected: false },
+{ input: [[0,1,0],[1,0,0]], expected: true },
 
+{ input: [[1,1,1],[1,1,1]], expected: true },
+{ input: [[0,0,0],[0,0,0]], expected: true },
+
+{ input: [[1,0,1,0,1],[0,1,0,1,0]], expected: true },
+{ input: [[1,0,1,0,1],[0,0,1,0,1]], expected: false },
+
+{ input: [[0,1,1,0,0],[1,0,1,0,0]], expected: true },
+{ input: [[0,1,1,0,0],[0,0,0,1,1]], expected: false },
+
+{ input: [[1,0,0,0,0,1],[0,1,0,0,1,0]], expected: true }
+];
         let results = "";
 
         tests.forEach((test, i) => {
