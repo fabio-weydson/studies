@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Robot Time Series Challenge</title>
+
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    background:#111;
+    color:#eee;
+    padding:30px;
+    max-width:900px;
+    margin:auto;
+  }
+
+  textarea {
+    width:100%;
+    height:180px;
+    background:#1e1e1e;
+    color:#fff;
+    border:1px solid #444;
+    padding:12px;
+    font-family:monospace;
+    font-size:14px;
+  }
+
+  button {
+    margin-top:15px;
+    padding:12px 18px;
+    background:#2d7ef7;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+    font-size:16px;
+  }
+
+  button:hover {
+    background:#1c64d1;
+  }
+
+  pre {
+    background:#1e1e1e;
+    padding:15px;
+    margin-top:20px;
+    white-space:pre-wrap;
+    border:1px solid #333;
+  }
+
+  .box {
+    background:#181818;
+    padding:20px;
+    border:1px solid #333;
+    margin-bottom:20px;
+  }
+  </style>
+
+  
+</head>
+<body>
+  <h1>Amazon SDE Interview - Robot Position Time Series Challenge</h1>
+<h2>I made this challenge to train a solution for this problem, as I couldn't find the exact same problem anywhere.</h2>
+<div class="box">
+<h3>Challenge</h3>
+<p>
+Given a grid of robot positions over time, determine if the sequence is valid.
+</p>
+
+<p>
+Each row represents one time step.  
+Each index can be:
+</p>
+
+<ul>
+<li><b>1</b> = robot present</li>
+<li><b>0</b> = empty</li>
+</ul>
+
+<p>
+Rules:
+</p>
+
+<ul>
+<li>The number of robots stays constant.</li>
+<li>Each robot may move at most <b>1 index</b> left or right per step.</li>
+<li>No robot can teleport.</li>
+</ul>
+
+<p>
+Return <b>true</b> if valid, otherwise <b>false</b>.
+</p>
+
+<p><b>Example valid:</b></p>
+<pre>[[1,0,0,1],
+ [0,1,1,0]]</pre>
+
+<p><b>Example invalid:</b></p>
+<pre>[[1,0,0,0,1],
+ [1,0,1,0,0]]</pre>
+</div>
+
+<div class="box">
+<h3>Your Function</h3>
+<p>Edit only the function below:</p>
+
+<textarea id="code">
+function isValidTimeSeries(grid) {
+    // Your solution here
+}
+</textarea>
+
+<button onclick="runTests()">Run Tests</button>
+
+<pre id="output"></pre>
+</div>
+
+  <script>
+    function runTests() {
+    let userCode = document.getElementById("code").value;
+    let output = document.getElementById("output");
+
+    try {
+        eval(userCode);
+
+        const tests = [
+            {
+                input: [[1,0,0,1],[0,1,1,0]],
+                expected: true
+            },
+            {
+                input: [[1,0,0,0,1],[1,0,1,0,0]],
+                expected: false
+            },
+            {
+                input: [[1,0,1],[0,1,1]],
+                expected: true
+            },
+            {
+                input: [[1,0,1],[0,0,1]],
+                expected: false
+            },
+            {
+                input: [[0,1,0],[1,0,0]],
+                expected: true
+            }
+        ];
+
+        let results = "";
+
+        tests.forEach((test, i) => {
+            let result = isValidTimeSeries(test.input);
+            results += 
+`Test ${i+1}
+Input: ${JSON.stringify(test.input)}
+Expected: ${test.expected}
+Your Output: ${result}
+${result === test.expected ? "✅ PASS" : "❌ FAIL"}
+
+`;
+        });
+
+        output.textContent = results;
+
+    } catch(err) {
+        output.textContent = err;
+    }
+}
+  </script>
+</body>
+</html>
